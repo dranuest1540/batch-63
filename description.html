@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Contact Me</title>
+	<title>Project</title>
 
 	<!-- Font Awesome -->
 	<script src="https://kit.fontawesome.com/b62e5ae178.js" crossorigin="anonymous"></script>
@@ -28,45 +28,13 @@
 </head>
 
 <body>
-	<!-- Navbar -->
 	<div id="navbar"></div>
 
-	<!-- Forms -->
-	<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-		<div class="col-sm-5">
-			<h2 class="text-center fw-bold mb-4">GET IN TOUCH</h2>
-			<form>
-				<div class="mb-3">
-					<label for="inputName" class="form-label fw-medium">Name</label>
-					<input type="text" class="form-control shadow" id="inputName">
-				</div>
-				<div class="mb-3">
-					<label for="inputEmail" class="form-label fw-medium">Email</label>
-					<input type="email" class="form-control shadow" id="inputEmail">
-				</div>
-				<div class="mb-3">
-					<label for="inputNumber" class="form-label fw-medium">Phone Number</label>
-					<input type="number" class="form-control shadow" id="inputNumber">
-				</div>
-				<div class="mb-3">
-					<label for="inputSubject" class="form-label fw-medium">Subject</label>
-					<select class="form-select shadow" id="inputSubject">
-						<option selected></option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
-					</select>
-				</div>
-				<div class="mb-3">
-					<label for="inputMessage" class="form-label fw-medium">Your Message</label>
-					<textarea class="form-control shadow" id="inputMessage" rows="3"></textarea>
-				</div>
-                <div class="text-end mt-5">
-				    <button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
-                </div>
-			</form>
-		</div>
-	</div>
+	<div class="container-fluid" id="project-detail"></div>
+
+    <!-- Link JS -->
+	<script src="js/project.js"></script>
+	<script src="js/description.js"></script>
 </body>
 
 </html>

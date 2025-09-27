@@ -30,3 +30,18 @@ body {
     font-weight: 500;
     font-style: normal;
 }
+
+.card-effect:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease-in;
+}
+
+.link-effect {
+    color: black;
+    text-decoration: none;
+}
+
+.link-effect:hover {
+    color: blue;
+    text-decoration: underline;
+}
