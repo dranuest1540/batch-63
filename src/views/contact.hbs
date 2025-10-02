@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact Me</title>
+
+	<!-- Font Awesome -->
+	<script src="https://kit.fontawesome.com/b62e5ae178.js" crossorigin="anonymous"></script>
+
+	<!-- Link CSS -->
+	<link rel="stylesheet" href="../assets/css/style.css">
+
+	<!-- Link JS -->
+	<script src="../assets/js/include.js"></script>
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Fredericka+the+Great&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div id="navbar"></div>
+
+	<!-- Forms -->
+	<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+		<div class="col-sm-5">
+			<h2 class="text-center fw-bold mb-4">GET IN TOUCH</h2>
+			<form>
+				<div class="mb-3">
+					<label for="inputName" class="form-label fw-medium">Name</label>
+					<input type="text" class="form-control shadow" id="inputName">
+				</div>
+				<div class="mb-3">
+					<label for="inputEmail" class="form-label fw-medium">Email</label>
+					<input type="email" class="form-control shadow" id="inputEmail">
+				</div>
+				<div class="mb-3">
+					<label for="inputNumber" class="form-label fw-medium">Phone Number</label>
+					<input type="number" class="form-control shadow" id="inputNumber">
+				</div>
+				<div class="mb-3">
+					<label for="inputSubject" class="form-label fw-medium">Subject</label>
+					<select class="form-select shadow" id="inputSubject">
+						<option selected></option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="inputMessage" class="form-label fw-medium">Your Message</label>
+					<textarea class="form-control shadow" id="inputMessage" rows="3"></textarea>
+				</div>
+                <div class="text-end mt-5">
+				    <button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
+                </div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
