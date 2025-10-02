@@ -58,6 +58,28 @@ renderProjects();
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
+    // Validation
+    let valid = true;
+
+    if (!form.checkValidity()) {
+        valid = false;
+    }
+
+    const checkedBox = document.querySelectorAll(".form-check-input:checked").length;
+    const checkValid =document.getElementById("checkbox-validation");
+    if(checkedBox === 0) {
+        e.stopPropagation()
+        checkValid.style.display = "block";
+    } else {
+        checkValid.style.display = "none";
+    }
+
+    if (!valid) {
+        e.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+    }
+
     const imageFile = document.getElementById("inputImage").files[0];
 
     if(imageFile) {
@@ -67,7 +89,7 @@ form.addEventListener("submit", function(e) {
         };
         reader.readAsDataURL(imageFile);
     } else {
-        saveProject("Day_5/assets/default.jpg");
+        saveProject("assets/default.jpg");
     }
 });
 
@@ -103,4 +125,5 @@ function saveProject(imagePath) {
 
     renderProjects();
     form.reset();
+    form.classList.remove("was-validated");
 }

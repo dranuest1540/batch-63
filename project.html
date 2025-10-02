@@ -35,57 +35,75 @@
 	<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 		<div class="col-sm-5">
 			<h2 class="text-center fw-bold mb-4">ADD MY PROJECT</h2>
-			<form>
+			<form class="needs-validation" novalidate>
 				<div class="mb-3">
 					<label for="inputProjectName" class="form-label fw-medium">Project Name</label>
 					<input type="text" class="form-control shadow" id="inputProjectName" required>
+					<div class="invalid-feedback">
+						Project Name wajib diisi.
+					</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<label for="inputStartDate" class="form-label fw-medium">Start Date</label>
 						<input type="date" class="form-control shadow" id="inputStartDate" required>
+						<div class="invalid-feedback">
+							Pilih tanggal mulai.
+						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="inputEndDate" class="form-label fw-medium">End Date</label>
 						<input type="date" class="form-control shadow" id="inputEndDate" required>
+						<div class="invalid-feedback">
+							Pilih tanggal selesai.
+						</div>
 					</div>
 				</div>
 				<div class="mb-3">
 					<label for="inputDescription" class="form-label fw-medium">Description</label>
 					<textarea class="form-control shadow" id="inputDescription" rows="3" required></textarea>
+					<div class="invalid-feedback">
+						Deskripsi wajib diisi.
+					</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label fw-medium">Technologies</label>
 					<div class="row mx-1">
 						<div class="form-check col-sm-6">
-							<input class="form-check-input shadow" type="checkbox" value="Node Js" id="node">
-							<label class="form-check-label" for="node">
+							<input class="form-check-input border shadow" type="checkbox" value="Node Js" id="node">
+							<label class="form-check-label text-dark" for="node">
 								Node Js
 							</label>
 						</div>
 						<div class="form-check col-sm-6">
-							<input class="form-check-input shadow" type="checkbox" value="Next Js" id="next">
-							<label class="form-check-label" for="next">
+							<input class="form-check-input border shadow" type="checkbox" value="Next Js" id="next">
+							<label class="form-check-label text-dark" for="next">
 								Next Js
 							</label>
 						</div>
 						<div class="form-check col-sm-6">
-							<input class="form-check-input shadow" type="checkbox" value="React Js" id="react">
-							<label class="form-check-label" for="react">
+							<input class="form-check-input border shadow" type="checkbox" value="React Js" id="react">
+							<label class="form-check-label text-dark" for="react">
 								React Js
 							</label>
 						</div>
 						<div class="form-check col-sm-6">
-							<input class="form-check-input shadow" type="checkbox" value="Laravel" id="laravel">
-							<label class="form-check-label" for="laravel">
+							<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="laravel">
+							<label class="form-check-label text-dark" for="laravel">
 								Laravel
 							</label>
 						</div>
+					</div>
+					<div class="invalid-feedback" id="checkbox-validation" style="display: none;">
+						Pilih minimal 1 Technologies.
 					</div>
 				</div>
 				<div class="mb-3">
 					<label for="inputImage" class="form-label fw-medium">Upload Image</label>
 					<input class="form-control shadow" type="file" id="inputImage" required>
+					<div class="invalid-feedback">
+						Upload gambar project.
+					</div>
 				</div>
 				<div class="text-end mt-5 mb-3">
 					<button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
@@ -104,7 +122,7 @@
 		</div>
 	</section>
 
-    <script src="js/project.js"></script>
+	<script src="js/project.js"></script>
 </body>
 
 </html>
