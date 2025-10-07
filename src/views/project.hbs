@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Project</title>
+
+	<!-- Font Awesome -->
+	<script src="https://kit.fontawesome.com/b62e5ae178.js" crossorigin="anonymous"></script>
+
+	<!-- Link CSS -->
+	<link rel="stylesheet" href="../assets/css/style.css">
+
+	<!-- Link JS -->
+	<script src="../assets/js/include.js"></script>
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Fredericka+the+Great&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div id="navbar"></div>
+
+	<!-- Forms -->
+	<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+		<div class="col-sm-5">
+			<h2 class="text-center fw-bold mb-4">ADD MY PROJECT</h2>
+			<form class="needs-validation" novalidate>
+				<div class="mb-3">
+					<label for="inputProjectName" class="form-label fw-medium">Project Name</label>
+					<input type="text" class="form-control shadow" id="inputProjectName" required>
+					<div class="invalid-feedback">
+						Project Name wajib diisi.
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<label for="inputStartDate" class="form-label fw-medium">Start Date</label>
+						<input type="date" class="form-control shadow" id="inputStartDate" required>
+						<div class="invalid-feedback">
+							Pilih tanggal mulai.
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="inputEndDate" class="form-label fw-medium">End Date</label>
+						<input type="date" class="form-control shadow" id="inputEndDate" required>
+						<div class="invalid-feedback">
+							Pilih tanggal selesai.
+						</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="inputDescription" class="form-label fw-medium">Description</label>
+					<textarea class="form-control shadow" id="inputDescription" rows="3" required></textarea>
+					<div class="invalid-feedback">
+						Deskripsi wajib diisi.
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label fw-medium">Technologies</label>
+					<div class="row mx-1">
+						<div class="form-check col-sm-6">
+							<input class="form-check-input border shadow" type="checkbox" value="Node Js" id="node">
+							<label class="form-check-label text-dark" for="node">
+								Node Js
+							</label>
+						</div>
+						<div class="form-check col-sm-6">
+							<input class="form-check-input border shadow" type="checkbox" value="Next Js" id="next">
+							<label class="form-check-label text-dark" for="next">
+								Next Js
+							</label>
+						</div>
+						<div class="form-check col-sm-6">
+							<input class="form-check-input border shadow" type="checkbox" value="React Js" id="react">
+							<label class="form-check-label text-dark" for="react">
+								React Js
+							</label>
+						</div>
+						<div class="form-check col-sm-6">
+							<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="laravel">
+							<label class="form-check-label text-dark" for="laravel">
+								Laravel
+							</label>
+						</div>
+					</div>
+					<div class="invalid-feedback" id="checkbox-validation" style="display: none;">
+						Pilih minimal 1 Technologies.
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="inputImage" class="form-label fw-medium">Upload Image</label>
+					<input class="form-control shadow" type="file" id="inputImage" required>
+					<div class="invalid-feedback">
+						Upload gambar project.
+					</div>
+				</div>
+				<div class="text-end mt-5 mb-3">
+					<button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
+				</div>
+			</form>
+		</div>
+	</section>
+
+	<!-- List Project -->
+	<section class="container-fluid bg-white" style="min-height: 100vh;">
+		<h2 class="pt-5 mb-4 fw-bold text-center">MY PROJECT</h2>
+
+		<!-- Project -->
+		<div class="container px-5">
+			<div class="row" id="list-project"></div>
+		</div>
+	</section>
+
+	<script src="../assets/js/project.js"></script>
+</body>
+
+</html>
