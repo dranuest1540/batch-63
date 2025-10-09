@@ -1,0 +1,121 @@
+{{> navbar}}
+
+<!-- Forms -->
+<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="col-sm-5">
+		<h2 class="text-center fw-bold mb-4">ADD MY PROJECT</h2>
+		<form action="/project/store" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+			<div class="mb-3">
+				<label for="inputProjectName" class="form-label fw-medium">Project Name</label>
+				<input type="text" class="form-control shadow" id="inputProjectName" name="project_name" required>
+				<div class="invalid-feedback">
+					Project Name wajib diisi.
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<label for="inputStartDate" class="form-label fw-medium">Start Date</label>
+					<input type="date" class="form-control shadow" id="inputStartDate" name="project_start" required>
+					<div class="invalid-feedback">
+						Pilih tanggal mulai.
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="inputEndDate" class="form-label fw-medium">End Date</label>
+					<input type="date" class="form-control shadow" id="inputEndDate" name="project_end" required>
+					<div class="invalid-feedback">
+						Pilih tanggal selesai.
+					</div>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="inputDescription" class="form-label fw-medium">Description</label>
+				<textarea class="form-control shadow" id="inputDescription" rows="3" name="project_description" required></textarea>
+				<div class="invalid-feedback">
+					Deskripsi wajib diisi.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label fw-medium">Technologies</label>
+				<div class="row mx-1">
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Node Js" id="node" name="project_technologies">
+						<label class="form-check-label text-dark" for="node">
+							Node Js
+						</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Next Js" id="next" name="project_technologies">
+						<label class="form-check-label text-dark" for="next">
+							Next Js
+						</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="React Js" id="react" name="project_technologies">
+						<label class="form-check-label text-dark" for="react">
+							React Js
+						</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="laravel" name="project_technologies">
+						<label class="form-check-label text-dark" for="laravel">
+							Laravel
+						</label>
+					</div>
+				</div>
+				<div class="invalid-feedback" id="checkbox-validation" style="display: none;">
+					Pilih minimal 1 Technologies.
+				</div>
+			</div>
+			<img id="preview" class="mb-3 img-fluid rounded" style="display:none; max-height:200px;">
+			<div class="mb-3">
+				<label for="inputImage" class="form-label fw-medium">Upload Image</label>
+				<input class="form-control shadow" type="file" id="inputImage" name="project_image" required>
+				<div class="invalid-feedback">
+					Upload gambar project.
+				</div>
+			</div>
+			<div class="text-end mt-5 mb-3">
+				<button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
+			</div>
+		</form>
+	</div>
+</section>
+
+<!-- List Project -->
+<section class="container-fluid bg-white" style="min-height: 100vh;">
+	<h2 class="pt-5 mb-4 fw-bold text-center">MY PROJECT</h2>
+
+	<!-- Project -->
+	<div class="container px-5">
+		<div class="row">
+			{{#each projects}}
+			<div class="col-lg-4 col-md-6 mb-5">
+				<div class="card card-effect border-0 shadow">
+					<div class="card-body">
+						<img src="../assets/uploads/{{this.project_image}}" class="card-img-top img-fluid rounded object-fit-cover" style="height: 250px">
+						<div class="card-title mt-2">
+							<a href="/description?id={{this.id}}" class="fs-5 fw-bold m-0 link-effect">{{this.project_name}}</a>
+							<small class="text-body-secondary d-block">
+								durasi : {{projectDateCalc this.project_start this.project_end}}
+							</small>
+						</div>
+						<p class="card-text card-truncate">{{this.project_description}}</p>
+						<div class="d-flex flex-row gap-3">
+							{{#each (splitTech this.project_technologies)}}
+								<div><i class="fa-brands {{getIcon this}} fa-xl"></i></div>
+							{{/each}}
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="d-flex gap-1 justify-content-center">
+							<a href="#" class="btn btn-dark w-50">edit</a>
+							<a href="/project/destroy/{{this.id}}" class="btn btn-dark w-50 delete-btn">delete</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,37 @@
+{{> navbar}}
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="col-sm-5">
+		<h2 class="text-center fw-bold mb-4">GET IN TOUCH</h2>
+		<form action="/contact/store" method="POST">
+			<div class="mb-3">
+				<label for="inputName" class="form-label fw-medium">Name</label>
+				<input type="text" name="inputName" class="form-control shadow" id="inputName">
+			</div>
+			<div class="mb-3">
+				<label for="inputEmail" class="form-label fw-medium">Email</label>
+				<input type="email" name="inputEmail" class="form-control shadow" id="inputEmail">
+			</div>
+			<div class="mb-3">
+				<label for="inputNumber" class="form-label fw-medium">Phone Number</label>
+				<input type="number" name="inputNumber" class="form-control shadow" id="inputNumber">
+			</div>
+			<div class="mb-3">
+				<label for="inputSubject" class="form-label fw-medium">Subject</label>
+				<select name="inputSubject" class="form-select shadow" id="inputSubject">
+					<option selected></option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label for="inputMessage" class="form-label fw-medium">Your Message</label>
+				<textarea name="inputMessage" class="form-control shadow" id="inputMessage" rows="3"></textarea>
+			</div>
+			<div class="text-end mt-5">
+				<button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>
