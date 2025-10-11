@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg-color: #1f242d;
+    --second-bg-color: #323946;
+    --text-color: #fff;
+    --main-color: #0ef;
+}
+
+body {
+    margin-top: 50px !important;
+    padding: 0;
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        margin-top: 100px !important;
+    }
+}
+
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050; /* agar selalu di atas elemen lain */
+}
+
+.section-bg-costume {
+    background-color: var(--second-bg-color);
+}
+
+.navbar-toggler {
+	border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+.bg-nav-costume {
+    background-color: var(--bg-color);
+    box-shadow: 0 0 3rem var(--main-color);
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-main-color {
+    color: var(--main-color);
+}
+
+/* Memotong Text */
+.card-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* jumlah baris maksimal */
+    line-clamp: 3; /* standard property for compatibility */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-background {
+    background-color: var(--second-bg-color) !important;
+    border: .2rem solid var(--main-color) !important;
+    color: var(--text-color) !important;
+}
+
+.costume-link {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    background: transparent !important;
+    border: .14rem solid var(--main-color) !important;
+    border-radius: 50% !important;
+    font-size: 24px !important;
+    color: var(--main-color) !important;
+    text-decoration: none;
+    transition: .5s ease !important;
+}
+
+.costume-link:hover {
+    background-color: var(--main-color) !important;
+    color: var(--second-bg-color) !important;
+    box-shadow: 0 0 1rem var(--main-color) !important;
+}
+
+.btn-costume-link {
+    color: var(--main-color) !important;
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.btn-costume-link:hover {
+    transition: 0.1s ease-in !important;
+    text-shadow:  0 0 7px #0ef !important;
+}
+
+.font-saira-bold {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.font-saira-normal {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-main {
+    color: var(--text-color) !important;
+    margin-left: 1rem !important;
+    transition: .3s ease !important;
+}
+
+.btn-main:hover,
+.btn-main:active {
+    color: var(--main-color) !important;
+}
+
+.btn-outline-main {
+    padding: 5px 12px;
+    background: var(--main-color) !important;
+    box-shadow: 0 0 1rem var(--main-color) !important;
+    color: var(--second-bg-color) !important;
+    border-radius: 4rem !important;
+    font-weight: 600 !important;
+    transition: .3s ease !important;
+    border: 0;
+}
+
+.btn-outline-main:hover {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    color: var(--main-color) !important;
+}
+
+.card-effect {
+    transition: 0.2s ease-in;
+}
+
+.card-effect:hover {
+    transform: scale(1.05);
+}
+
+.link-effect {
+    color: black;
+    text-decoration: none;
+}
+
+.link-effect:hover {
+    transition: 0.1s ease-in;
+    color: var(--main-color);
+    text-shadow:  2px 2px 4px #0ef ;
+}
+
+.nav-link.active {
+    color: var(--main-color) !important;
+    text-shadow: 0 0 8px var(--main-color) !important;
+    font-weight: 600;
+}
+
+.active {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    color: var(--main-color) !important;
+    text-shadow: 0 0 8px var(--main-color) !important;
+    font-weight: 600;
+}

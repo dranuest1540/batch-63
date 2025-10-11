@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-nav-costume">
+	<div class="container-fluid px-5">
+		<a class="navbar-brand" href="#">
+			<img src="../../assets/images/brandred.png" alt="Link Dumbways" class="img-fluid" width="50px">
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item dropdown">
+					<a class="nav-link btn-main dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						{{#if user}}
+							<span><i class="fa-solid fa-fan fa-spin"></i></span> {{user.name}}
+						{{else}}
+							Ghost
+						{{/if}}
+					</a>
+					<ul class="dropdown-menu">
+						{{#if user}}
+							<li><a class="dropdown-item" href="/logout">Log Out</a></li>
+						{{else}}
+							<li><a class="dropdown-item" href="/login">Login</a></li>
+							<li	li><a class="dropdown-item" href="/register">Register</a></li>
+						{{/if}}
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link btn-main {{#if (eq activePage 'home')}}active{{/if}}" href="/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link btn-main {{#if (eq activePage 'project')}}active{{/if}}" href="/project">My Project</a>
+				</li>
+			</ul>
+			<a href="/contact">
+				<button type="button" class="btn-outline-main {{#if (eq activePage 'contact')}}active{{/if}}">Contact Me</button>
+			</a>
+		</div>
+	</div>
+</nav>

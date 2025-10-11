@@ -1,0 +1,33 @@
+{{> navbar}}
+
+<div class="container-fluid">
+    <h2 class="pt-5 mb-4 fw-bold text-center text-main-color">{{project.project_name}}</h2>
+    <div class="container px-5">
+        <div class="row my-3">
+            <div class="col-lg-7 pe-3">
+                <img src="../assets/uploads/{{project.project_image}}" class="img-fluid w-100 object-fit-cover" style="max-height: 450px;">
+            </div>
+            <div class="col-lg-5 ps-3">
+                <p class="fs-3 fw-medium">Duration</p>
+                <p class="fs-4"><i class="fa-solid fa-calendar-days"></i> {{formatDate project.project_start}} - {{formatDate project.project_end}}</p>
+                <p class="fs-4"><i class="fa-solid fa-clock"></i> {{projectDateCalc project.project_start project.project_end}}</p>
+                <p class="fs-3 fw-medium mt-5">Technologies</p>
+                <div class="row">
+                    {{#each (splitTech project.project_technologies)}}
+                    <p class="fs-4 col-sm-6">
+                        <i class="fa-brands {{getIcon this}} fa-xl"></i> {{this}}
+                    </p>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <p class="fs-5" style="text-align: justify;">{{project.project_description}}</p>
+        </div>
+        <div class="mb-4">
+            <a href="/project">
+                <button type="button" class="btn-outline-main">← Back to Project List</button>
+            </a>
+        </div>
+    </div>
+</div>

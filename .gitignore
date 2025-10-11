@@ -1,0 +1,19 @@
+# Abaikan semua file video
+*.mkv
+*.mp4
+*.avi
+*.mov
+
+# Abaikan file sementara sistem
+.DS_Store
+Thumbs.db
+
+# Abaikan folder library
+node_modules/
+vendor/
+
+# Abaikan file log
+*.log
+
+# Abaikan file dotenv
+*.env

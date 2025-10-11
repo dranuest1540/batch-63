@@ -1,0 +1,73 @@
+{{> navbar}}
+
+<!-- Forms -->
+<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="col-sm-5">
+		<h2 class="text-center fw-bold mb-4 mt-5">EDIT PROJECT</h2>
+		<form action="/project/update/{{project.id}}" method="POST" enctype="multipart/form-data">
+			<div class="mb-3">
+				<label for="inputProjectName" class="form-label fw-medium">Project Name</label>
+				<input type="text" class="form-control shadow" id="inputProjectName" name="project_name" value="{{project.project_name}}" required>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<label for="inputStartDate" class="form-label fw-medium">Start Date</label>
+					<input type="date" class="form-control shadow" id="inputStartDate" name="project_start" value="{{formatDateReset project.project_start}}" required>
+				</div>
+				<div class="col-md-6">
+					<label for="inputEndDate" class="form-label fw-medium">End Date</label>
+					<input type="date" class="form-control shadow" id="inputEndDate" name="project_end" value="{{formatDateReset project.project_end}}" required>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="inputDescription" class="form-label fw-medium">Description</label>
+				<textarea class="form-control shadow" id="inputDescription" rows="3" name="project_description" required>{{project.project_description}}</textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label fw-medium">Technologies</label>
+				<div class="row mx-1">
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Node Js" id="node" name="project_technologies"
+                        {{#if (includes (splitTech project.project_technologies) "Node Js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="node">Node Js</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Next Js" id="next" name="project_technologies"
+                        {{#if (includes (splitTech project.project_technologies) "Next Js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="next">Next Js</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="React Js" id="react" name="project_technologies"
+                        {{#if (includes (splitTech project.project_technologies) "React Js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="react">React Js</label>
+					</div>
+					<div class="form-check col-sm-6">
+						<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="laravel" name="project_technologies"
+                        {{#if (includes (splitTech project.project_technologies) "React")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="laravel">Laravel</label>
+					</div>
+				</div>
+			</div>
+            <img src="/assets/uploads/{{project.project_image}}" class="img-fluid mb-3 rounded" style="max-height: 200px;">
+			{{!-- <img id="preview" class="mb-3 img-fluid rounded" style="display:none; max-height:200px;"> --}}
+			<div class="mb-3">
+				<label for="inputImage" class="form-label fw-medium">Upload Image</label>
+				<input class="form-control shadow" type="file" id="inputImage" name="project_image">
+			</div>
+			<div class="text-end mt-5 mb-3">
+				<button type="submit" class="btn-outline-main px-4 me-2">Update</button>
+				<a href="/project">
+					<button class="btn-outline-main px-4">Cancel</button>
+				</a>
+			</div>
+		</form>
+	</div>
+</section>
