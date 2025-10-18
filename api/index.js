@@ -7,7 +7,7 @@ import fs from 'fs';
 import moment from 'moment';
 import flash from 'express-flash';
 import session from 'express-session';
-import {guest, auth} from "./src/middleware/auth.js";
+import {guest, auth} from "../src/middleware/auth.js";
 import serverless from "serverless-http";
 
 const app = express()
