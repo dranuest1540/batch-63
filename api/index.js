@@ -44,11 +44,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, '../public'))); // versi vercel
 app.use("/views", express.static("src/views"))
-app.use(flash()); 
-app.use((req, res, next) => { // Middleware session to auth navigation
-    res.locals.user = req.session.user;
-    next();
-});
 app.use(session({ // Sesi login di server
     store: new PgSession({
         pool: pool,             // koneksi PostgreSQL
@@ -62,6 +57,11 @@ app.use(session({ // Sesi login di server
         maxAge: 24 * 60 * 60 * 1000 // 1 hari
     }
 }));
+app.use(flash()); 
+app.use((req, res, next) => { // Middleware session to auth navigation
+    res.locals.user = req.session.user;
+    next();
+});
 
 hbs.registerPartials(path.join(__dirname, '../src/views/partials'));  // versi vercel
 
