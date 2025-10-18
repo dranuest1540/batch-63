@@ -35,7 +35,7 @@ const uploadProject = multer({ storage: storageProject });
 const uploadExperience = multer({ storage: storageExperience });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PgSession = pgSession(session);
+const PgSession = pgConnect(session);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../src/views')); // versi vercel
