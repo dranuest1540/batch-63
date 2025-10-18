@@ -14,4 +14,8 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
+pool.connect()
+  .then(() => console.log("✅ Connected to Neon successfully"))
+  .catch(err => console.error("❌ Neon connection error:", err));
+
 export default pool;
