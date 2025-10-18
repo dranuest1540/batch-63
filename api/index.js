@@ -17,7 +17,11 @@ const port = process.env.PORT || 3000
 
 const storageExperience = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "src/assets/uploads/works");
+        const dir = "public/uploads/works"; // path baru
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -25,7 +29,11 @@ const storageExperience = multer.diskStorage({
 });
 const storageProject = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "src/assets/uploads/projects");
+        const dir = "public/uploads/projects"; // path baru
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -62,6 +70,7 @@ app.use((req, res, next) => { // Middleware session to auth navigation
     res.locals.user = req.session.user;
     next();
 });
+app.use("/uploads", express.static(path.join(__dirname, '../public/uploads')));
 
 hbs.registerPartials(path.join(__dirname, '../src/views/partials'));  // versi vercel
 
@@ -205,7 +214,7 @@ app.get('/formExperience/destroy/:id', auth, async (req, res) => {
         }
 
         const imageFileName = result.rows[0].company_logo;
-        const imagePath = path.join("src", "assets", "uploads", "works", imageFileName);
+        const imagePath = path.join("public/uploads/works", imageFileName);
 
         await pool.query("DELETE FROM experience WHERE id = $1", [id]);
 
@@ -265,7 +274,7 @@ app.post('/formExperience/update/:id', auth, uploadExperience.single("company_lo
         // 🔹 Jika upload logo baru
         if (req.file) {
             const newImage = req.file.filename;
-            const oldImagePath = path.join("src", "assets", "uploads", "works", imageFileName);
+            const oldImagePath = path.join("public/uploads/works", imageFileName);
 
             // 🔹 Hapus file lama (jika ada)
             if (fs.existsSync(oldImagePath)) {
@@ -327,7 +336,7 @@ app.get('/formProject/destroy/:id', auth, async (req, res) => {
         }
 
         const imageFileName = result.rows[0].project_image;
-        const imagePath = path.join("src", "assets", "uploads", "projects", imageFileName);
+        const imagePath = path.join("public/uploads/works", imageFileName);
 
         await pool.query("DELETE FROM project WHERE id = $1", [id]);
 
@@ -386,7 +395,7 @@ app.post('/formProject/update/:id', auth, uploadProject.single("project_image"),
         // 🔹 Jika upload Image baru
         if (req.file) {
             const newImage = req.file.filename;
-            const oldImagePath = path.join("src", "assets", "uploads", "projects", imageFileName);
+            const oldImagePath = path.join("public/uploads/works", imageFileName);
 
             // 🔹 Hapus file lama (jika ada)
             if (fs.existsSync(oldImagePath)) {
