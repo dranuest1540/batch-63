@@ -32,10 +32,9 @@ const storageProject = multer.diskStorage({
 });
 const uploadProject = multer({ storage: storageProject });
 const uploadExperience = multer({ storage: storageExperience });
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const PgSession = pgSession(session);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../src/views')); // versi vercel
@@ -54,6 +53,19 @@ app.use((req, res, next) => { // Middleware session to auth navigation
     res.locals.user = req.session.user;
     next();
 });
+app.use(session({ // Sesi login di server
+    store: new PgSession({
+        pool: pool,             // koneksi PostgreSQL
+        tableName: 'session',   // nama table session
+        createTableIfMissing: true
+    }),
+    secret: 'secretSession',     // ganti dengan secret random kamu
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        maxAge: 24 * 60 * 60 * 1000 // 1 hari
+    }
+}));
 
 hbs.registerPartials(path.join(__dirname, '../src/views/partials'));  // versi vercel
 
