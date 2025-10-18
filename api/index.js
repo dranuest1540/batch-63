@@ -44,11 +44,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, '../public'))); // versi vercel
 app.use("/views", express.static("src/views"))
-app.use(session({ // Menambahkan sesi middleware flash
-    secret: 'secretSession',
-    resave: false,
-    saveUninitialized: true,
-})); 
 app.use(flash()); 
 app.use((req, res, next) => { // Middleware session to auth navigation
     res.locals.user = req.session.user;
