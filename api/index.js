@@ -10,6 +10,7 @@ import session from 'express-session';
 import {guest, auth} from "../src/middleware/auth.js";
 import serverless from "serverless-http";
 import { fileURLToPath } from 'url';
+import pgConnect from 'connect-pg-simple';
 
 const app = express()
 const port = process.env.PORT || 3000
