@@ -1,0 +1,252 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+section {
+    padding-top: 76px;
+}
+
+.biodata-img {
+    width: 320px;
+}
+
+#project .card {
+    transition: .3s ease;
+}
+
+#project .card:hover {
+    box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .175);
+}
+
+.experience-card {
+    display: flex;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+}
+
+.experience-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.fs-7 {
+    font-size: 14px;
+}
+
+.fs-8 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.img-blue-shadow {
+    box-shadow: 1rem 1rem 1rem rgba(37, 99, 235, 0.4);
+    transition: .2s ease;
+}
+
+.img-blue-shadow:hover {
+    transform: scale(1.05);
+    box-shadow: .5rem .5rem .5rem rgba(37, 99, 235, 0.5);
+}
+
+.mb-6 {
+    margin-bottom: 10rem;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tech-icon {
+    width: 5rem;
+    height: 5rem;
+    background: white;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.tech-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tech-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tech-item span {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgb(75, 85, 99);
+}
+
+.tech-swiper {
+    overflow: hidden;
+}
+
+.tech-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+    will-change: transform;
+}
+
+.tech-swiper .swiper-slide {
+    width: auto !important;
+    padding: 0 1rem;
+}
+
+.text-poppins-h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.text-poppins-h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.text-poppins-h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.text-poppins {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.text-poppins-sub-header {
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
+.text-poppins-normal {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+    text-align: justify;
+}
+
+.text-poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}
+
+@media (max-width: 992px) {
+    #biodata {
+        padding-top: 120px;
+    }
+
+    /* Biodata Section */
+    .biodata-img {
+        width: 256px;
+    }
+
+    .text-poppins-h1 {
+        margin-top: 20px;
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .text-poppins-sub-header {
+        margin-top: 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .text-poppins-normal {
+        font-size: 16px;
+    }
+
+    .text-poppins-light {
+        font-size: 14px;
+    }
+
+    /* Tech Section */
+    .text-poppins-h2 {
+        font-size: 24px;
+    }
+
+    .tech-icon {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    /* Experience Section */
+    .experience-card {
+        flex-direction: column;
+        /* Ubah jadi vertikal */
+        align-items: start;
+        /* Pusatkan konten */
+        text-align: start;
+        padding: 1.5rem;
+    }
+
+    .experience-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .experience-card .ms-4 {
+        margin-left: 0 !important;
+    }
+
+    .experience-card ul {
+        text-align: left;
+        /* Tetap rata kiri untuk list */
+        font-size: 14px;
+    }
+
+    .experience-card .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .experience-card h3 {
+        font-size: 18px;
+    }
+
+    .experience-card p,
+    .experience-card span {
+        font-size: 14px;
+    }
+
+    .experience-card .badge {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-links {
+		flex-direction: column;       /* Jadi atas-bawah */
+		text-align: center;           /* Rata tengah */
+		gap: 0.75rem;                 /* Jarak antar elemen */
+	}
+
+	.contact-separator {
+		display: none;                /* Sembunyikan tanda garis (-) */
+	}
+}

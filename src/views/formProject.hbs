@@ -1,0 +1,179 @@
+<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="col-md-5 col-sm-7">
+		<h2 class="text-center fw-bold mb-4">
+			{{#if project}}
+				EDIT PROJECT
+			{{else}}
+				ADD PROJECT
+			{{/if}}			
+		</h2>
+		<form action="{{#if project}}/formProject/update/{{project.id}}{{else}}/formProject/store{{/if}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+			{{!-- INPUT TITLE --}}
+			<div class="mb-3">
+				<label for="inputTitle" class="form-label fw-medium">Title</label>
+				<input type="text" class="form-control shadow" id="inputTitle" name="title" placeholder="Input project title" value="{{project.title}}" required>
+				<div class="invalid-feedback">
+					Please fill your Project Title.
+				</div>
+			</div>
+			{{!-- INPUT DESCRIPTION --}}
+			<div class="mb-3">
+				<label for="inputDescription" class="form-label fw-medium">Description</label>
+				<textarea class="form-control shadow" id="inputDescription" rows="5" name="description" placeholder="Input project description" required>{{project.description}}</textarea>
+                <div class="invalid-feedback">
+					Please fill your Project Description.
+				</div>
+			</div>
+			{{!-- INPUT TECHNOLOGIES --}}
+			<div class="mb-3">
+				<label class="form-label fw-medium">Technologies</label>
+				<div class="row mx-1">
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Node.js" id="Node.js" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Node.js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Node">Node.js</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Bootstrap" id="Bootstrap" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Bootstrap")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Bootstrap">Bootstrap</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Dart" id="Dart" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Dart")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Dart">Dart</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="Laravel" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Laravel")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Laravel">Laravel</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Express.js" id="Express.js" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Express.js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Express.js">Express.js</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Flutter" id="Flutter" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Flutter")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Flutter">Flutter</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="JavaScript" id="JavaScript" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "JavaScript")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="JavaScript">JavaScript</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="MySQL" id="MySQL" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "MySQL")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="MySQL">MySQL</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="PHP" id="PHP" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "PHP")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="PHP">PHP</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="PostgreSQL" id="PostgreSQL" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "PostgreSQL")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="PostgreSQL">PostgreSQL</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Tailwind" id="Tailwind" name="tech_stack"
+						{{#if (includes (splitTech project.tech_stack) "Tailwind")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Tailwind">Tailwind</label>
+					</div>
+				</div>
+				<div class="invalid-feedback" id="checkbox-validation" style="display: none;">
+					Select at least 1 Technology.
+				</div>
+			</div>
+			{{!-- INPUT IMAGE --}}
+            <div class="d-flex justify-content-between">
+				{{#if project.project_image}}
+					<img src="/assets/uploads/projects/{{project.project_image}}" class="mb-3 img-fluid rounded" style="max-height:200px;">
+				{{/if}}
+				<span id="arrow-icon" class="fs-4 d-flex align-items-center d-none">
+					<i class="fa-solid fa-angles-right"></i>
+				</span>
+				<img id="preview" class="mb-3 img-fluid rounded" style="display:none; max-height:200px;">
+			</div>
+            <div class="mb-3">
+				<label for="inputImage" class="form-label fw-medium">Project Image</label>
+				<input type="file" class="form-control shadow" id="inputImage" name="project_image" accept="image/*" {{#unless project.project_image}}required{{/unless}}>
+				<div class="invalid-feedback">
+					Please insert your Project Image.
+				</div>
+			</div>
+			{{!-- SELECT REPOSITORY --}}
+			<div class="mb-3">
+				<label for="repository" class="form-label fw-medium">Repository Status</label>
+				<select class="form-select shadow" id="repository" name="repository_status" required>
+					<option value="" disabled {{#unless project.repository_status}}selected{{/unless}}>Select Repository Status</option>
+					<option value="private" {{#if (eq project.repository_status "private")}}selected{{/if}}>Private Repository</option>
+					<option value="public" {{#if (eq project.repository_status "public")}}selected{{/if}}>Public Repository</option>
+				</select>
+				<div class="invalid-feedback">
+					Please select your Repository Status.
+				</div>
+			</div>
+			{{!-- LINK REPOSITORY --}}
+			<div class="mb-3" style="display: none;">
+				<label for="linkrepository" class="form-label fw-medium">Repository Status</label>
+				<input type="text" class="form-control shadow" id="linkrepository" name="link_repository" placeholder="Input repository link" value="{{project.link_repository}}">
+				<div class="invalid-feedback">
+					Please fill your Repository Link.
+				</div>
+			</div>
+			{{!-- SELECT DEMO --}}
+			<div class="mb-3">
+				<label for="demo" class="form-label fw-medium">Demo Status</label>
+				<select class="form-select shadow" id="demo" name="demo_status" required>
+					<option value="" disabled {{#unless project.demo_status}}selected{{/unless}}>Select Demo Status</option>
+					<option value="available" {{#if (eq project.demo_status "available")}}selected{{/if}}>Available</option>
+					<option value="unavailable" {{#if (eq project.demo_status "unavailable")}}selected{{/if}}>Unavailable</option>
+				</select>
+				<div class="invalid-feedback">
+					Please select your Demo Status.
+				</div>
+			</div>
+			{{!-- LINK DEMO --}}
+			<div class="mb-3" style="display: none;">
+				<label for="linkdemo" class="form-label fw-medium">Demo Status</label>
+				<input type="text" class="form-control shadow" id="linkdemo" name="link_demo" placeholder="Input demo link" value="{{project.link_demo}}">
+				<div class="invalid-feedback">
+					Please fill your Demo Link.
+				</div>
+			</div>
+
+            <div class="d-flex justify-content-between my-5">
+                <a href="/" class="btn btn-dark">Back</a>
+				<button type="submit" class="btn btn-success">
+					{{#if project}}Update{{else}}Submit{{/if}}
+				</button>
+            </div>
+		</form>
+	</div>
+</section>

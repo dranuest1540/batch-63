@@ -1,0 +1,179 @@
+<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="col-md-5 col-sm-7">
+		<h2 class="text-center fw-bold mb-4">
+			{{#if experience}}
+				EDIT WORK EXPERIENCE
+			{{else}}
+				ADD WORK EXPERIENCE			
+			{{/if}}
+		</h2>
+		<form action="{{#if experience}}/formExperience/update/{{experience.id}}{{else}}/formExperience/store{{/if}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+			{{!-- INPUT POSITION --}}
+			<div class="mb-3">
+				<label for="inputPosition" class="form-label fw-medium">Position</label>
+				<input type="text" class="form-control shadow" id="inputPosition" name="position" placeholder="Input your position" value="{{experience.position}}" required>
+				<div class="invalid-feedback">
+					Please fill your Position.
+				</div>
+			</div>
+			{{!-- INPUT COMPANY NAME --}}
+			<div class="mb-3">
+				<label for="inputCompanyName" class="form-label fw-medium">Company Name</label>
+				<input type="text" class="form-control shadow" id="inputCompanyName" name="company_name" placeholder="Input your company name" value="{{experience.company_name}}" required>
+				<div class="invalid-feedback">
+					Please fill your Company Name.
+				</div>
+			</div>
+			{{!-- INPUT START DATE - END DATE --}}
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<label for="inputStartDate" class="form-label fw-medium">Start Date</label>
+					<input type="date" class="form-control shadow" id="inputStartDate" name="start_date" value="{{formatDateReset experience.start_date}}" required>
+					<div class="invalid-feedback">
+						Choose start date.
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="inputEndDate" class="form-label fw-medium">End Date</label>
+					<input type="date" class="form-control shadow" id="inputEndDate" name="end_date" value="{{formatDateReset experience.end_date}}" required>
+					<div class="invalid-feedback">
+						Choose end date.
+					</div>
+				</div>
+			</div>
+			{{!-- INPUT RESPONSIBILITIES --}}
+			<div class="mb-3">
+				<label for="inputResponsibilities" class="form-label fw-medium">Responsibilities</label>
+				<div id="responsibility-container">
+					{{#if experience}}
+						{{#each experience.responsibilities}}
+							<div class="input-group mb-2">
+								<input type="text" class="form-control shadow" name="responsibilities[]" value="{{this}}" placeholder="e.g. Built applicant management system" required>
+								<div class="invalid-feedback">Please fill at least one responsibility.</div>
+							</div>
+						{{/each}}
+					{{else}}
+						<div class="input-group mb-2">
+							<button type="button" class="btn btn-success add-responsibility">
+								<i class="fa-solid fa-plus"></i>
+							</button>
+							<input type="text" class="form-control shadow" name="responsibilities[]" placeholder="e.g. Built applicant management system" required>
+							<div class="invalid-feedback">Please fill at least one responsibility.</div>
+						</div>
+					{{/if}}
+				</div>
+				<small class="text-muted ms-1">Click “+” to add more responsibilities.</small>
+			</div>
+			{{!-- INPUT TECHNOLOGIES --}}
+			<div class="mb-3">
+				<label class="form-label fw-medium">Technologies</label>
+				<div class="row mx-1">
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Node.js" id="Node.js" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Node.js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Node">Node.js</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Bootstrap" id="Bootstrap" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Bootstrap")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Bootstrap">Bootstrap</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Dart" id="Dart" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Dart")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Dart">Dart</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Laravel" id="Laravel" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Laravel")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Laravel">Laravel</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Express.js" id="Express.js" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Express.js")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Express.js">Express.js</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Flutter" id="Flutter" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Flutter")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Flutter">Flutter</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="JavaScript" id="JavaScript" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "JavaScript")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="JavaScript">JavaScript</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="MySQL" id="MySQL" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "MySQL")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="MySQL">MySQL</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="PHP" id="PHP" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "PHP")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="PHP">PHP</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="PostgreSQL" id="PostgreSQL" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "PostgreSQL")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="PostgreSQL">PostgreSQL</label>
+					</div>
+					<div class="form-check col-lg-4">
+						<input class="form-check-input border shadow" type="checkbox" value="Tailwind" id="Tailwind" name="tech_stack"
+						{{#if (includes (splitTech experience.tech_stack) "Tailwind")}}
+                            checked
+                        {{/if}}>
+						<label class="form-check-label" for="Tailwind">Tailwind</label>
+					</div>
+				</div>
+				<div class="invalid-feedback" id="checkbox-validation" style="display: none;">
+					Select at least 1 Technology.
+				</div>
+			</div>
+			{{!-- INPUT IMAGE --}}
+			<div class="d-flex justify-content-between">
+				{{#if experience.company_logo}}
+					<img src="/assets/uploads/works/{{experience.company_logo}}" class="mb-3 img-fluid rounded" style="max-height:100px;">
+				{{/if}}
+				<span id="arrow-icon" class="fs-4 d-flex align-items-center d-none">
+					<i class="fa-solid fa-angles-right"></i>
+				</span>
+				<img id="preview" class="mb-3 img-fluid rounded" style="display:none; max-height:100px;">
+			</div>
+			<div class="mb-3">
+				<label for="inputImage" class="form-label fw-medium">Company Logo</label>
+				<input type="file" class="form-control shadow" id="inputImage" name="company_logo" accept="image/*" {{#unless experience.company_logo}}required{{/unless}}>
+				<div class="invalid-feedback">
+					Please insert your Company Logo.
+				</div>
+			</div>
+			
+			<div class="d-flex justify-content-between my-5">
+				<a href="/" class="btn btn-dark">Back</a>
+				<button type="submit" class="btn btn-success">
+					{{#if experience}}Update{{else}}Submit{{/if}}
+				</button>
+			</div>
+		</form>
+	</div>
+</section>
