@@ -1,6 +1,6 @@
 import express from 'express';
 import hbs from 'hbs';
-import pool from '../Final_Task/src/config/database.js';
+import pool from '../src/config/database.js';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
