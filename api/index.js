@@ -39,11 +39,10 @@ const __dirname = path.dirname(__filename);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../src/views')); // versi vercel
-// app.set("views", "src/views"); // tidak terpakai di vercel
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/assets", express.static("src/assets"))
+app.use("/assets", express.static(path.join(__dirname, '../public'))); // versi vercel
 app.use("/views", express.static("src/views"))
 app.use(session({ // Menambahkan sesi middleware flash
     secret: 'secretSession',
@@ -56,7 +55,6 @@ app.use((req, res, next) => { // Middleware session to auth navigation
     next();
 });
 
-// hbs.registerPartials("src/views/partials"); // tidak terpakai di vercel
 hbs.registerPartials(path.join(__dirname, '../src/views/partials'));  // versi vercel
 
 // ========== REGISTER HELPER ==========
@@ -88,8 +86,8 @@ app.get('/', async (req, res) => {
         res.render('index', {
         layout: "layouts/app",
         title: "Danu Prastyo",
-        css: "../assets/css/style.css",
-        js: "../assets/js/script.js",
+        css: "/assets/css/style.css",
+        js: "/assets/js/script.js",
         experience: experienceResult.rows,
         project: projectResult.rows,
     });
