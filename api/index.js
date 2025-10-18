@@ -9,6 +9,7 @@ import flash from 'express-flash';
 import session from 'express-session';
 import {guest, auth} from "../src/middleware/auth.js";
 import serverless from "serverless-http";
+import { fileURLToPath } from 'url';
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -32,8 +33,13 @@ const storageProject = multer.diskStorage({
 const uploadProject = multer({ storage: storageProject });
 const uploadExperience = multer({ storage: storageExperience });
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 app.set('view engine', 'hbs');
-app.set("views", "src/views");
+app.set('views', path.join(__dirname, '../src/views')); // versi vercel
+// app.set("views", "src/views"); // tidak terpakai di vercel
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,7 +56,8 @@ app.use((req, res, next) => { // Middleware session to auth navigation
     next();
 });
 
-hbs.registerPartials("src/views/partials");
+// hbs.registerPartials("src/views/partials"); // tidak terpakai di vercel
+hbs.registerPartials(path.join(__dirname, '../src/views/partials'));  // versi vercel
 
 // ========== REGISTER HELPER ==========
 hbs.registerHelper('formatDate', function (date) { // hbs format-date helper
