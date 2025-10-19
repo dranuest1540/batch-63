@@ -11,7 +11,7 @@ import serverless from "serverless-http";
 import { fileURLToPath } from 'url';
 import pgConnect from 'connect-pg-simple';
 import { uploadExperience, uploadProject } from "../src/config/cloudinary.js";
-import { match } from 'assert';
+import { v2 as cloudinary } from "cloudinary";
 
 const app = express()
 const port = process.env.PORT || 3000
