@@ -1,7 +1,6 @@
 import express from 'express';
 import hbs from 'hbs';
 import pool from '../src/config/database.js';
-import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import moment from 'moment';
@@ -11,36 +10,12 @@ import {guest, auth} from "../src/middleware/auth.js";
 import serverless from "serverless-http";
 import { fileURLToPath } from 'url';
 import pgConnect from 'connect-pg-simple';
+import { uploadExperience, uploadProject } from "../src/config/cloudinary.js";
+import { match } from 'assert';
 
 const app = express()
 const port = process.env.PORT || 3000
 
-const storageExperience = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const dir = "public/uploads/works"; // path baru
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const storageProject = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const dir = "public/uploads/projects"; // path baru
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const uploadProject = multer({ storage: storageProject });
-const uploadExperience = multer({ storage: storageExperience });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PgSession = pgConnect(session);
@@ -186,7 +161,7 @@ app.get('/formExperience', auth, async (req, res) => {
 app.post('/formExperience/store', auth, uploadExperience.single("company_logo"), async (req, res) => {
     try {
         const { position, company_name, start_date, end_date, responsibilities, tech_stack } = req.body;
-        const image = req.file.filename;
+        const image = req.file.path;
 
         const listResponsibilities = Array.isArray(responsibilities) ? responsibilities : [responsibilities];
         const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
@@ -213,17 +188,19 @@ app.get('/formExperience/destroy/:id', auth, async (req, res) => {
             return res.status(404).send("Experience not found!");
         }
 
-        const imageFileName = result.rows[0].company_logo;
-        const imagePath = path.join("public/uploads/works", imageFileName);
+        const imageUrl = result.rows[0].company_logo;
+
+        const matches = imageUrl.match(/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z]+$/);
+        const publicId = matches ? matches[1] : null;
+
+        if (publicId) {
+            await cloudinary.uploader.destroy(publicId);
+            console.log(`Deleted Cloudinary image: ${publicId}`);
+        }
 
         await pool.query("DELETE FROM experience WHERE id = $1", [id]);
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
-            console.log(`Deleted image file: ${imageFileName}`);
-        } else {
-            console.log(`Image file not found: ${imageFileName}`);
-        }
+        console.log(`experience with ID ${id} deleted (image retained in Cloudinary)`);
+        
         res.redirect('/');
     } catch(err) {
         console.error("Failed destroy experience: ", err);
@@ -273,7 +250,7 @@ app.post('/formExperience/update/:id', auth, uploadExperience.single("company_lo
 
         // 🔹 Jika upload logo baru
         if (req.file) {
-            const newImage = req.file.filename;
+            const newImage = req.file.path;
             const oldImagePath = path.join("public/uploads/works", imageFileName);
 
             // 🔹 Hapus file lama (jika ada)
@@ -309,7 +286,7 @@ app.get('/formProject', auth, (req, res) => {
 app.post('/formProject/store', auth, uploadProject.single("project_image"), async (req, res) => {
     try {
         const { title, description, tech_stack, repository_status, demo_status, link_repository, link_demo } = req.body;
-        const image = req.file.filename;
+        const image = req.file.path;
 
         const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
 
@@ -335,17 +312,19 @@ app.get('/formProject/destroy/:id', auth, async (req, res) => {
             return res.status(404).send("Project not found!");
         }
 
-        const imageFileName = result.rows[0].project_image;
-        const imagePath = path.join("public/uploads/works", imageFileName);
+        const imageUrl = result.rows[0].project_image;
+
+        const matches = imageUrl.match(/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z]+$/);
+        const publicId = matches ? matches[1] : null;
+
+        if (publicId) {
+            await cloudinary.uploader.destroy(publicId);
+            console.log(`Deleted Cloudinary image: ${publicId}`);
+        }
 
         await pool.query("DELETE FROM project WHERE id = $1", [id]);
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
-            console.log(`Deleted image file: ${imageFileName}`);
-        } else {
-            console.log(`Image file not found: ${imageFileName}`);
-        }
+        console.log(`Project with ID ${id} deleted (image retained in Cloudinary)`);
+        
         res.redirect('/');
     } catch(err) {
         console.error("Failed destroy project: ", err);
@@ -394,7 +373,7 @@ app.post('/formProject/update/:id', auth, uploadProject.single("project_image"),
 
         // 🔹 Jika upload Image baru
         if (req.file) {
-            const newImage = req.file.filename;
+            const newImage = req.file.path;
             const oldImagePath = path.join("public/uploads/works", imageFileName);
 
             // 🔹 Hapus file lama (jika ada)

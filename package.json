@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^1.41.3",
     "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
@@ -19,6 +20,7 @@
     "hbs": "^4.2.0",
     "moment": "^2.30.1",
     "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "pg": "^8.16.3",
     "serverless-http": "^4.0.0"
   },
