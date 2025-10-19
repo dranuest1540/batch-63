@@ -236,39 +236,48 @@ app.get('/formExperience/edit/:id', auth, async (req, res) => {
 // Update Data
 app.post('/formExperience/update/:id', auth, uploadExperience.single("company_logo"), async (req, res) => {
     try {
-		const id = req.params.id;
-		const { position, company_name, start_date, end_date, responsibilities, tech_stack } = req.body;
-		const listResponsibilities = Array.isArray(responsibilities) ? responsibilities : [responsibilities];
-		const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
+        const id = req.params.id;
+        const { position, company_name, start_date, end_date, responsibilities, tech_stack } = req.body;
+        const listResponsibilities = Array.isArray(responsibilities) ? responsibilities : [responsibilities];
+        const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
 
-		const oldImage = await pool.query("SELECT company_logo FROM experience WHERE id = $1", [id]);
-		if (oldImage.rows.length === 0) {
-			return res.status(404).send("Logo not found");
-		}
-
-        let imageFileName = oldImage.rows[0].company_logo;
-
-        // 🔹 Jika upload logo baru
-        if (req.file) {
-            const newImage = req.file.path;
-            const oldImagePath = path.join("public/uploads/works", imageFileName);
-
-            // 🔹 Hapus file lama (jika ada)
-            if (fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath);
-            }
-
-            imageFileName = newImage; // simpan nama file baru
+        // 🔹 Ambil data lama dari DB
+        const oldData = await pool.query("SELECT company_logo FROM experience WHERE id = $1", [id]);
+        if (oldData.rows.length === 0) {
+            return res.status(404).send("Experience not found");
         }
 
-		await pool.query(`UPDATE experience SET position = $1, company_name = $2, start_date = $3, end_date = $4, responsibilities = $5, tech_stack = $6, company_logo = $7 WHERE id = $8`, 
-            [position, company_name, start_date, end_date, listResponsibilities, checkboxTech, imageFileName, id]);
+        let imageUrl = oldData.rows[0].company_logo;
 
-		res.redirect('/');
-	} catch (err) {
-		console.error(err);
-		res.status(500).send("Error updating data");
-	}
+        // 🔹 Jika user upload gambar baru
+        if (req.file) {
+            const newImageUrl = req.file.path; // Cloudinary URL baru
+
+            // 🔹 Hapus gambar lama dari Cloudinary
+            const matches = imageUrl.match(/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z]+$/);
+            const publicId = matches ? matches[1] : null;
+            if (publicId) {
+                await cloudinary.uploader.destroy(publicId);
+                console.log(`Old Cloudinary image deleted: ${publicId}`);
+            }
+
+            // 🔹 Gunakan URL baru untuk disimpan
+            imageUrl = newImageUrl;
+        }
+
+        // 🔹 Update data ke database
+        await pool.query(
+            `UPDATE experience 
+            SET position = $1, company_name = $2, start_date = $3, end_date = $4, responsibilities = $5, tech_stack = $6, company_logo = $7 
+            WHERE id = $8`,
+            [position, company_name, start_date, end_date, listResponsibilities, checkboxTech, imageUrl, id]
+        );
+
+        res.redirect('/');
+    } catch (err) {
+        console.error("Error updating experience:", err);
+        res.status(500).send("Error updating data");
+    }
 });
 
 // ========== HALAMAN PROJECT ==========
@@ -360,38 +369,47 @@ app.get('/formProject/edit/:id', auth, async (req, res) => {
 // Update Data
 app.post('/formProject/update/:id', auth, uploadProject.single("project_image"), async (req, res) => {
     try {
-		const id = req.params.id;
-		const { title, description, tech_stack, repository_status, demo_status, link_repository, link_demo } = req.body;
-		const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
+        const id = req.params.id;
+        const { title, description, tech_stack, repository_status, demo_status, link_repository, link_demo } = req.body;
+        const checkboxTech = Array.isArray(tech_stack) ? tech_stack : [tech_stack];
 
-		const oldImage = await pool.query("SELECT project_image FROM project WHERE id = $1", [id]);
-		if (oldImage.rows.length === 0) {
-			return res.status(404).send("image not found");
-		}
-
-        let imageFileName = oldImage.rows[0].project_image;
-
-        // 🔹 Jika upload Image baru
-        if (req.file) {
-            const newImage = req.file.path;
-            const oldImagePath = path.join("public/uploads/works", imageFileName);
-
-            // 🔹 Hapus file lama (jika ada)
-            if (fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath);
-            }
-
-            imageFileName = newImage; // simpan nama file baru
+        // 🔹 Ambil data lama dari DB
+        const oldData = await pool.query("SELECT project_image FROM project WHERE id = $1", [id]);
+        if (oldData.rows.length === 0) {
+            return res.status(404).send("Project not found");
         }
 
-		await pool.query(`UPDATE project SET title = $1, description = $2, tech_stack = $3, project_image = $4, repository_status = $5, demo_status = $6, link_repository = $7, link_demo = $8 WHERE id = $9`, 
-            [title, description, checkboxTech, imageFileName, repository_status, demo_status, link_repository, link_demo, id]);
+        let imageUrl = oldData.rows[0].project_image;
 
-		res.redirect('/');
-	} catch (err) {
-		console.error(err);
-		res.status(500).send("Error updating data");
-	}
+        // 🔹 Jika user upload gambar baru
+        if (req.file) {
+            const newImageUrl = req.file.path; // URL Cloudinary baru
+
+            // 🔹 Hapus gambar lama dari Cloudinary
+            const matches = imageUrl.match(/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z]+$/);
+            const publicId = matches ? matches[1] : null;
+            if (publicId) {
+                await cloudinary.uploader.destroy(publicId);
+                console.log(`Old Cloudinary image deleted: ${publicId}`);
+            }
+
+            // 🔹 Simpan URL baru
+            imageUrl = newImageUrl;
+        }
+
+        // 🔹 Update data project
+        await pool.query(
+            `UPDATE project 
+            SET title = $1, description = $2, tech_stack = $3, project_image = $4, repository_status = $5, demo_status = $6, link_repository = $7, link_demo = $8 
+            WHERE id = $9`,
+            [title, description, checkboxTech, imageUrl, repository_status, demo_status, link_repository, link_demo, id]
+        );
+
+        res.redirect('/');
+    } catch (err) {
+        console.error("Error updating project:", err);
+        res.status(500).send("Error updating data");
+    }
 });
 
 export default app;
